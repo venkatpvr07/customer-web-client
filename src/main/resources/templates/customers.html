@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        Customer display
+        <title>
+            Customer Display
+        </title>
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
+        <div class="header">
+            <h1 class="header-title">ADP Project 1</h1>
+        </div>
         <h1>
             Customers table
         </h1>
@@ -17,7 +23,8 @@
                 <th>Customer Name</th>
                 <th>Total Sales</th>
                 <th>Balance Due</th>
-                <th>Operations</th>
+                <th>Edit Operation</th>
+                <th>Delete Operation</th>
 
             </tr>
             <tr th:each = "customer : ${customers}">
