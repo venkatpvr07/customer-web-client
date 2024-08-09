@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>Customer Form</title>
-        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="/stylesheet.css">
     </head>
     <body>
         <h1>
-            Customers Form
+            Customer Form
         </h1>
         <form method="post" th:action="@{${customer.id} != null ? @{'/web/customers/update/' + ${customer.id}} : @{'/web/customers'}}" th:object="${customer}">
             <input type="hidden" th:field="*{id}" />
@@ -14,6 +14,6 @@
             <input type="text" th:field="*{name}" />
             <button type="submit">Submit</button>
         </form>
-        <a href="/web/customers">Back to Lists</a>
+        <a href="/web/customers">Back to Details Page</a>
     </body>
 </html>

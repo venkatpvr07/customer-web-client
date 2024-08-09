@@ -70,12 +70,13 @@ public class CustomerWebController {
     public String displayPaymentForm() {
         return "payment-form";
     }
+    
 
-    @PostMapping("/{id}/purchase")
-    public String purchase(@PathVariable Long id, @RequestBody double customer) {
-        System.out.println("---------reached /id/purchase---------");
-        restTemplate.postForObject(customerUrl + "/" + id + "/purchase", customer, Customer.class);
-        return "redirect:/web/customers";
-    }
+    // @PostMapping("/{id}/purchase")
+    // public String purchase(@PathVariable Long id, @RequestBody double customer) {
+    //     System.out.println("---------reached /id/purchase---------");
+    //     restTemplate.postForObject(customerUrl + "/" + id + "/purchase", customer, Customer.class);
+    //     return "redirect:/web/customers";
+    // }
 
 }

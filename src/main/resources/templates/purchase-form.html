@@ -4,7 +4,7 @@
         <title>
             Purchase Form
         </title>
-        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="stylesheet" href="/stylesheet.css">
         <script>
             function updateTotal() {
             console.log("reached method");
@@ -48,7 +48,7 @@
             })
             .catch((error) => {
                 console.log('Error occurred: ', error);
-                alert('Purchase failed');
+                alert('Purchase failed', error);
             });
         }
 
@@ -58,6 +58,9 @@
 
             if(id > 0 && total > 0) {
                 postData(`http://localhost:8080/customers/${id}/purchase`, total);
+            }
+            if(id < 0){
+                alert("Customer id cannot be negative");
             }
         }
 
@@ -69,15 +72,22 @@
                 postData(`http://localhost:8080/customers/${id}/purchase-credit`, total);
             }
         }
+
+        function validate() {
+            const id = document.getElementById('id').value;
+            if(id<0) {
+                alert("Customer id cannot be negative");
+            }
+        }
         </script>
     </head>
     <body>
         <h1>
-            Purchase Widgets
+            Purchase Form
         </h1>
         <form id="purchaseForm">
             <label for="id">Customer id:</label>
-            <input type="number" id="id" name="id" min="0" required />
+            <input type="number" id="id" name="id" min="0" oninput="validate()" required />
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" value="0" min="0" oninput="updateTotal()" required />
             <label for="totalAmount">Total Amount:</label>
