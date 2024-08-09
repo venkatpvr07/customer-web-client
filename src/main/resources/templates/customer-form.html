@@ -7,7 +7,7 @@
         <h1>
             Customers Form
         </h1>
-        <form method="post" th:action="@{${customer.id} != 0 ? @{'/web/customers/update/' + ${customer.id}} : @{'/web/customers'}}" th:object="${customer}">
+        <form method="post" th:action="@{${customer.id} != null ? @{'/web/customers/update/' + ${customer.id}} : @{'/web/customers'}}" th:object="${customer}">
             <input type="hidden" th:field="*{id}" />
             <label>Name:</label>
             <input type="text" th:field="*{name}" />

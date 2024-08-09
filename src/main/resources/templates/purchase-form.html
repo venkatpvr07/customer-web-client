@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Purchase Form
+        </title>
+        <script>
+            function updateTotal() {
+            console.log("reached method");
+            var quantity1 = document.getElementById('quantity');
+            var total = document.getElementById('totalAmount');
+            const purchaseButton = document.getElementById('purchaseButton');
+            const purchaseCreditButton = document.getElementById('purchaseCreditButton');
+
+            const price = 25;
+            var quantity = parseInt(quantity1.value);
+
+            if(!isNaN(quantity) && quantity >= 0) {
+                console.log("quantity is: ",quantity);
+                var totalAmount = quantity * price;
+                total.value = totalAmount.toFixed(2);
+                console.log("amount is: ",total);
+                purchaseButton.disabled = false;
+                purchaseCreditButton.disabled = false;
+            }
+            else {
+                totalAmount.value = 0;
+                purchaseButton.disabled = true;
+                purchaseCreditButton.disabled = true;
+            }
+        }
+
+        function postData(url, data) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success: ', data);
+                alert('Purchase is successful');
+            })
+            .catch((error) => {
+                console.log('Error occurred: ', error);
+                alert('Purchase failed');
+            });
+        }
+
+        function handlePurchase() {
+            const id = document.getElementById('id').value;
+            const total = document.getElementById('totalAmount').value;
+
+            if(id > 0 && total > 0) {
+                postData(`http://localhost:8080/customers/${id}/purchase`, {total});
+            }
+        }
+
+        function handlePurchaseCredit() {
+            const id = document.getElementById('id').value;
+            const total = document.getElementById('totalAmount').value;
+
+            if(id > 0 && total > 0) {
+                postData(`/customers/${id}/purchase-credit`, {total});
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <h1>
+            Purchase Widgets
+        </h1>
+        <form id="purchaseForm">
+            <label for="id">Customer id:</label>
+            <input type="number" id="id" name="id" min="0" required />
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="0" min="0" oninput="updateTotal()" required />
+            <label for="totalAmount">Total Amount:</label>
+            <input type="number" id="totalAmount" name="totalAmount" readonly />
+            <button type="button" id="purchaseButton" onclick="handlePurchase()" disabled>Purchase</button>
+            <button type="button" id="purchaseCreditButton" onclick="handlePurchaseCredit()" disabled>Purchase with Credit</button>
+        </form>
+    </body>
+</html>

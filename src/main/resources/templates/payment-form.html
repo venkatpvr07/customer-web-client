@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Payment Form
+        </title>
+        <script>
+        function postData(url, data) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success: ', data);
+                alert('Payment is successful');
+            })
+            .catch((error) => {
+                console.log('Error occurred: ', error);
+                alert('Payment failed');
+            });
+        }
+
+        function handlePayment() {
+            const id = document.getElementById('id').value;
+            const amount = document.getElementById('paymentAmount').value;
+
+            if(id > 0 && amount > 0) {
+                postData(`/customers/${id}/payment`, {amount});
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <h1>
+            Payment
+        </h1>
+        <form>
+            <label for="id">Customer id:</label>
+            <input type="number" id="id" name="id" required />
+            <label for="paymentAmount">Payment Amount:</label>
+            <input type="number" id="paymentAmount" name="paymentAmount" required />
+            <button type="button" id="paymentButton" onclick="handlePayment()" disabled>Make a Payment</button>
+        </form>
+    </body>
+</html>

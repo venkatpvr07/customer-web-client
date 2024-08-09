@@ -45,7 +45,6 @@ public class CustomerWebController {
 
     @PostMapping()
     public String createCustomer(@ModelAttribute Customer customer) {
-        System.out.println(customer.getName());
         restTemplate.postForObject(customerUrl, customer, Customer.class);
         return "redirect:/web/customers";
     }
@@ -59,6 +58,23 @@ public class CustomerWebController {
     @GetMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable Long id) {
         restTemplate.delete(customerUrl + "/" + id);
+        return "redirect:/web/customers";
+    }
+
+    @GetMapping("/purchase")
+    public String displayPurchaseForm() {
+        return "purchase-form";
+    }
+
+    @GetMapping("/payment")
+    public String displayPaymentForm() {
+        return "payment-form";
+    }
+
+    @PostMapping("/{id}/purchase")
+    public String purchase(@PathVariable Long id, @RequestBody double customer) {
+        System.out.println("---------reached /id/purchase---------");
+        restTemplate.postForObject(customerUrl + "/" + id + "/purchase", customer, Customer.class);
         return "redirect:/web/customers";
     }
 
