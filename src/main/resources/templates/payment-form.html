@@ -49,7 +49,7 @@
         function handlePayment() {
             const id = document.getElementById('id').value;
             const amount = parseFloat(document.getElementById('paymentAmount').value);
-            const balanceDue = document.getElementById('balanceDue').value;
+            const balanceDue = parseFloat(document.getElementById('balanceDue').value);
             if(id > 0 && amount > 0 && amount <=balanceDue) {
                 postData(`http://localhost:8080/customers/${id}/payment`, amount);
             }

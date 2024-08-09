@@ -11,9 +11,9 @@
         <form method="post" th:action="@{${customer.id} != null ? @{'/web/customers/update/' + ${customer.id}} : @{'/web/customers'}}" th:object="${customer}">
             <input type="hidden" th:field="*{id}" />
             <label>Name:</label>
-            <input type="text" th:field="*{name}" />
+            <input type="text" th:field="*{name}" required/>
             <button type="submit">Submit</button>
         </form>
-        <a href="/web/customers">Back to Details Page</a>
+        <br /><a href="/web/customers"><button>Back to Details Page</button></a>
     </body>
 </html>
