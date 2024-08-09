@@ -39,10 +39,11 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
                 console.log('Success: ', data);
                 alert('Purchase is successful');
+                window.location.href = "http://localhost:8081/web/customers";
             })
             .catch((error) => {
                 console.log('Error occurred: ', error);
@@ -52,19 +53,19 @@
 
         function handlePurchase() {
             const id = document.getElementById('id').value;
-            const total = document.getElementById('totalAmount').value;
+            const total = parseFloat(document.getElementById('totalAmount').value);
 
             if(id > 0 && total > 0) {
-                postData(`http://localhost:8080/customers/${id}/purchase`, {total});
+                postData(`http://localhost:8080/customers/${id}/purchase`, total);
             }
         }
 
         function handlePurchaseCredit() {
             const id = document.getElementById('id').value;
-            const total = document.getElementById('totalAmount').value;
+            const total = parseFloat(document.getElementById('totalAmount').value);
 
             if(id > 0 && total > 0) {
-                postData(`/customers/${id}/purchase-credit`, {total});
+                postData(`http://localhost:8080/customers/${id}/purchase-credit`, total);
             }
         }
         </script>

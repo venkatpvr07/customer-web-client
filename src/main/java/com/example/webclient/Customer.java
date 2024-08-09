@@ -4,6 +4,8 @@ public class Customer {
 
     private Long id;
     private String name;
+    private double total_sales = 0.0;
+    private double balance_due = 0.0; 
 
     public Customer() {}
 
@@ -30,5 +32,21 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getTotalSales(){
+        return this.total_sales;
+    }
+
+    public void setTotalSales(double total_sales) {
+        this.total_sales = total_sales;
+    }
+
+    public double getBalanceDue(){
+        return this.balance_due;
+    }
+
+    public void setBalanceDue(double balance_due) {
+        this.balance_due = balance_due;
     }
 }
